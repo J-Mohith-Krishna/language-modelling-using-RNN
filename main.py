@@ -93,7 +93,7 @@ def inputTensor(line):
 
 def targetTensor(line):
     letter_indexes = [all_letters.find(line[li]) for li in range(1, len(line))]
-    letter_indexes.append(n_letters - 1)  # EOS
+    letter_indexes.append(n_letters - 1)
     return torch.LongTensor(letter_indexes)
 
 def randomTrainingExample():
@@ -110,7 +110,7 @@ n_iters = 100000
 print_every = 5000
 plot_every = 500
 all_losses = []
-total_loss = 0 # Reset every plot_every iters
+total_loss = 0
 start = time.time()
 
 def train(category_tensor, input_line_tensor, target_line_tensor):
@@ -148,7 +148,7 @@ plt.plot(all_losses)
 max_length = 20
 
 def sample(category, start_letter='A'):
-    with torch.no_grad():  # no need to track history in sampling
+    with torch.no_grad():
         category_tensor = categoryTensor(category)
         input = inputTensor(start_letter)
         hidden = rnn.initHidden()
